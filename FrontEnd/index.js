@@ -72,6 +72,32 @@ addButtonFilter();
 fetchAndDisplayWorks("http://localhost:5678/api/works");
 
 
+const loginLink = document.querySelector('nav ul li a[href="login.html"]');
+const editButton = document.getElementById("edit-projets");
+
+// Je vérifie si le token est présent dans localStorage
+const token = localStorage.getItem("token");
+
+if (token) {
+  // L'utilisateur est connecté
+  loginLink.textContent = "Logout";
+
+
+  if (editButton) {
+    editButton.style.display = "inline-block";
+  }
+
+  loginLink.addEventListener("click", () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  });
+} else {
+  // L'utilisateur est déconnecté
+  if (editButton) {
+    editButton.style.display = "none";
+  }
+}
+
 
 
 
